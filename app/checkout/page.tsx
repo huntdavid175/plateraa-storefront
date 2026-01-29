@@ -89,7 +89,7 @@ export default function CheckoutPage() {
       </header>
 
       {/* Content */}
-      <main className="max-w-5xl mx-auto px-4 py-6">
+      <main className="max-w-5xl mx-auto px-4 py-6 pb-24 sm:pb-6">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
           {/* Left column - details */}
           <section className="space-y-4">
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
               <h2 className="text-sm font-semibold text-stone-900 mb-3">
                 Order type
               </h2>
-              <div className="flex gap-2">
+              <div className="flex gap-2 mb-3">
                 <button
                   type="button"
                   onClick={() => setIsDelivery(true)}
@@ -122,6 +122,19 @@ export default function CheckoutPage() {
                   Pickup
                 </button>
               </div>
+              
+              {/* Delivery Pricing Info */}
+              {isDelivery && (
+                <div className="pt-3 border-t border-stone-200/60">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium text-stone-600">Delivery fee</span>
+                    <span className="text-sm font-semibold text-stone-900">₵{DELIVERY_FEE.toFixed(2)}</span>
+                  </div>
+                  <p className="text-[11px] text-stone-400">
+                    Standard delivery fee applies to all orders. Free delivery on orders over ₵50.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Contact details */}
@@ -353,7 +366,7 @@ export default function CheckoutPage() {
                       </div>
                     </div>
                     <p className="text-sm font-medium text-stone-900">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ₵{(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
                 ))}
@@ -362,21 +375,21 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-stone-500">
                   <span>Items</span>
                   <span className="text-stone-900">
-                    ${itemsSubtotal.toFixed(2)}
+                    ₵{itemsSubtotal.toFixed(2)}
                   </span>
                 </div>
                 {isDelivery && (
                   <div className="flex justify-between text-stone-500">
                     <span>Delivery fee</span>
                     <span className="text-stone-900">
-                      ${DELIVERY_FEE.toFixed(2)}
+                      ₵{DELIVERY_FEE.toFixed(2)}
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between text-stone-500">
                   <span>Service fee</span>
                   <span className="text-stone-900">
-                    ${SERVICE_FEE.toFixed(2)}
+                    ₵{SERVICE_FEE.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -386,7 +399,7 @@ export default function CheckoutPage() {
                   Total
                 </span>
                 <span className="text-base font-semibold text-stone-900">
-                  ${total.toFixed(2)}
+                  ₵{total.toFixed(2)}
                 </span>
               </div>
               <p className="mt-2 text-[11px] text-stone-400 text-center">
@@ -404,7 +417,7 @@ export default function CheckoutPage() {
           <div className="flex flex-col">
             <span className="text-xs text-stone-500">Total</span>
             <span className="text-base font-semibold text-stone-900">
-              ${total.toFixed(2)}
+              ₵{total.toFixed(2)}
             </span>
           </div>
           <button
