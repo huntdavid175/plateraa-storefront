@@ -1,9 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function PaymentConfirmationPage() {
-  const router = useRouter();
+  const params = useParams();
+  const institutionId = params.id as string;
 
   // Mock confirmation data – will be replaced with real data later
   const orderNumber = 'EO-48219';
@@ -32,8 +34,7 @@ export default function PaymentConfirmationPage() {
             Payment successful
           </h1>
           <p className="text-sm text-stone-500 max-w-sm mx-auto">
-            Your order is on its way from <span className="font-medium">Ember &amp; Oak</span>.
-            We’ve sent your receipt and live updates to your WhatsApp.
+            Your order is on its way. We&apos;ve sent your receipt and live updates to your WhatsApp.
           </p>
         </div>
 
@@ -65,19 +66,18 @@ export default function PaymentConfirmationPage() {
           <div className="space-y-1 text-sm">
             <div className="flex justify-between text-stone-500">
               <span>Payment method</span>
-              <span className="text-stone-900">•••• 4242</span>
+              <span className="text-stone-900">Mobile payment</span>
             </div>
             <div className="flex justify-between text-stone-500">
-              <span>Charged total</span>
-              <span className="text-stone-900">$48.49</span>
+              <span>Total</span>
+              <span className="text-stone-900">₵48.49</span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-          <button
-            type="button"
-            onClick={() => router.push('/restaurant/1')}
+        <div className="w-full max-w-md">
+          <Link
+            href={`/restaurant/${institutionId}`}
             className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm font-medium text-stone-700 hover:bg-stone-100 transition-colors"
           >
             <svg
@@ -94,17 +94,9 @@ export default function PaymentConfirmationPage() {
               />
             </svg>
             Back to restaurant
-          </button>
-          <button
-            type="button"
-            onClick={() => router.push('/')}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-stone-900 px-4 py-3 text-sm font-semibold text-stone-50 hover:bg-stone-800 transition-colors"
-          >
-            Browse more places
-          </button>
+          </Link>
         </div>
       </main>
     </div>
   );
 }
-
