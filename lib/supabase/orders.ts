@@ -14,6 +14,8 @@ export type CreateOrderRequest = {
   delivery_fee: number
   total_amount: number
   payment_method?: 'cash' | 'card' | 'mobile_money' | 'bank_transfer' | null
+  payment_status?: 'pending' | 'paid'
+  paid_at?: string | null
   notes?: string | null
   status: 'pending' | 'paid' | 'preparing' | 'ready' | 'delivered' | 'cancelled'
 }
@@ -50,6 +52,8 @@ export type Order = {
   delivery_fee: number
   total_amount: number
   payment_method: string | null
+  payment_status?: string
+  paid_at?: string | null
   notes: string | null
   status: string
   created_at: string

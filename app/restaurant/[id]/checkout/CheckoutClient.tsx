@@ -200,6 +200,10 @@ export default function CheckoutClient({ institutionId, institutionName, branche
         'mobile-payment': 'mobile_money',
       };
 
+      const backendPaymentMethod = paymentMethodMap[paymentMethod] || null;
+      const isMobileMoney = backendPaymentMethod === 'mobile_money';
+      const nowIso = new Date().toISOString();
+
       // Create order data
       const orderData = {
         institution_id: institutionId,
@@ -213,7 +217,9 @@ export default function CheckoutClient({ institutionId, institutionName, branche
         subtotal: subtotal,
         delivery_fee: deliveryFee,
         total_amount: total,
-        payment_method: paymentMethodMap[paymentMethod] || null,
+        payment_method: backendPaymentMethod,
+        payment_status: isMobileMoney ? 'paid' : 'pending',
+        paid_at: isMobileMoney ? nowIso : null,
         notes: deliveryInstructions.trim() || null,
         status: 'pending' as const,
       };
